@@ -12,8 +12,8 @@ var handlebars = require('express-handlebars');
 
 keystone.init({
 
-	'name': 'Golu',
-	'brand': 'Golu',
+	'name': 'Aadikara',
+	'brand': 'Aadikara',
 	
 	'less': 'public',
 	'static': 'public',
@@ -58,6 +58,7 @@ keystone.set('routes', require('./routes'));
 // Configure the navigation bar in Keystone's Admin UI
 
 keystone.set('nav', {
+  'products': ['products', 'product-categories'],
 	'posts': ['posts', 'post-categories'],
 	'enquiries': 'enquiries',
 	'users': 'users'
