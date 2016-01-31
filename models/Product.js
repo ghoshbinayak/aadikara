@@ -15,12 +15,9 @@ Product.add({
 	name: { type: String, required: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
-        cover: { type: String, required: true, default: '/keystone/img/cover.jpg' },
+        cover: { type: String, required: true, default: '/images/product-tile-cover.jpg' },
 	images: { type: Types.TextArray },
-	description: {
-		brief: { type: Types.Html, wysiwyg: true, height: 150 },
-		extended: { type: Types.Html, wysiwyg: true, height: 400 }
-	},
+	description: { type: Types.Html, wysiwyg: true, height: 400 },
 	categories: { type: Types.Relationship, ref: 'ProductCategory', many: true }
 });
 

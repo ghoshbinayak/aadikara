@@ -33,7 +33,20 @@ module.exports = function() {
 			return options.inverse(this);
 		}
 	};
-	
+
+  _helpers.ifuneq = function(a, b, options) {
+		if (a != b) {
+			return options.fn(this);
+		}
+	};
+			
+  // custom modulo check operator
+  _helpers.moduloIf =function(index_count, mod, block) {
+    if(parseInt(index_count)%(mod)=== 0){
+       return block.fn(this);
+    }
+  };
+
 	/**
 	 * Port of Ghost helpers to support cross-theming
 	 * ==============================================
