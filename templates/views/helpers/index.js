@@ -34,11 +34,15 @@ module.exports = function() {
 		}
 	};
 
-  _helpers.ifuneq = function(a, b, options) {
+        _helpers.ifuneq = function(a, b, options) {
 		if (a != b) {
 			return options.fn(this);
 		}
 	};
+
+        _helpers.add = function(a, b, options) {
+            return (a+b);
+        };
 			
   // custom modulo check operator
   _helpers.moduloIf =function(index_count, mod, block) {
@@ -231,13 +235,38 @@ module.exports = function() {
 	_helpers.postUrl = function(postSlug, options) {
 		return ('/blog/post/' + postSlug);
 	};
+
+        _helpers.getThumbFlickr = function(largeImg, options) {
+            var substring = largeImg.replace(/_._.\.jpg/, '');
+            if(substring !== largeImg){
+                return (substring + ".jpg");
+            }
+            else {
+                return largeImg;
+            }
+        };
+
+        _helpers.getMediumFlickr = function(largeImg, options) {
+            var substring = largeImg.replace(/_._.\.jpg/, '');
+            if(substring !== largeImg){
+                return (substring + "_c.jpg");
+            }
+            else {
+                return largeImg;
+            }
+        };
 	
 	// might be a ghost helper
 	// used for pagination urls on blog
 	_helpers.pageUrl = function(pageNumber, options) {
 		return '/blog?page=' + pageNumber;
 	};
-	
+
+        // used for pagination urls on product list page
+	_helpers.productPageUrl = function(pageNumber, options) {
+		return '/?page=' + pageNumber;
+	};
+
 	// create the category url for a blog-category page
 	_helpers.categoryUrl = function(categorySlug, options) {
 		return ('/blog/' + categorySlug);
@@ -308,6 +337,49 @@ module.exports = function() {
             return _helpers.pageUrl(nextPage);
         };
 
+
+        _helpers.productsPreviousUrl = function(previousPage, totalPages){
+            if(previousPage === false){
+                previousPage = 1;
+            }
+            return _helpers.productPageUrl(previousPage);
+        };
+
+        // special helper to ensure that we always have a valid next page url set
+        // even if the link is disabled, will default to totalPages
+        _helpers.productsNextUrl = function(nextPage, totalPages){
+            if(nextPage === false){
+                nextPage = totalPages;
+            }
+            return _helpers.productPageUrl(nextPage);
+        };
+
+        _helpers.productsNavigation = function(pages, currentPage, totalPages, options){
+		var html = '';
+		
+		// pages should be an array ex.  [1,2,3,4,5,6,7,8,9,10, '....']
+		// '...' will be added by keystone if the pages exceed 10
+		_.each(pages, function(page, ctr){
+			// create ref to page, so that '...' is displayed as text even though int value is required
+			var pageText = page,
+			// create boolean flag state if currentPage
+			isActivePage = ((page === currentPage)? true:false),
+			// need an active class indicator
+			liClass = ((isActivePage)? ' class="active"':'');
+
+			// if '...' is sent from keystone then we need to override the url
+			if(page === '...'){
+				// check position of '...' if 0 then return page 1, otherwise use totalPages
+				page = ((ctr)? totalPages:1);
+			}
+
+			// get the pageUrl using the integer value
+			var pageUrl = _helpers.productPageUrl(page);
+			// wrapup the html
+			html += '<li'+liClass+'>'+ linkTemplate({url:pageUrl,text:pageText})+'</li>\n';
+		});
+		return html;
+	};
 
 	//  ### Flash Message Helper
 	//  KeystoneJS supports a message interface for information/errors to be passed from server

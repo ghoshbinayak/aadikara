@@ -4,21 +4,52 @@
         {{# each data.products.results}}
             <div class='col-lg-3 col-md-4 col-sm-4 col-xs-6 product-grid-inline'>
                 <div class='product-tile'>	 
-                    <div class='product-tile-cover' style="background-image: url('{{{cover}}}')"></div>
+                    <div class='product-tile-cover' style="background-image: url('{{{getThumbFlickr cover}}}')"></div>
                     <h2> {{{name}}} </h2>
-                    <div class='product-tile-details'>
-                      <div class="product-desc-photos">
+                </div>
+                <script class='product-tile-details' type="text/template">
+                    <span class="og-close"></span>
+                    <div class="container full-height">
+                      <div id="product-desc-photos{{@index}}" class="carousel slide full-height product-desc-photos" data-ride="carousel">
+                          <!-- Indicators -->
+                          <ol class="carousel-indicators">
+                                <li data-target="#product-desc-photos{{@index}}" data-slide-to="0" class='active'></li>
+                            {{#each images}}
+   <li data-target="#product-desc-photos{{@../index}}" data-slide-to="{{add @index 1}}"></li>
+                            {{/each}}
+                          </ol>
+
+                          <!-- Wrapper for slides -->
+                          <div class="carousel-inner full-height" role="listbox">
+                               <div class="item full-height active">
+                                  <img src="{{{getMediumFlickr cover}}}" alt="image 0" class="full-height"/>
+                               </div>
                           {{#each images}}
-                              <div style='background-image: url('{{this}}')'></div>
+                              <div class="item full-height">
+                                  <img src="{{getMediumFlickr this}}" alt="image {{add @index 1 }}" class="full-height"/>
+                              </div>
                           {{/each}}
-                      </div>
+                          </div>
+
+                          <!-- Controls -->
+                          <a class="left carousel-control" href="#product-desc-photos{{@index}}" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="right carousel-control" href="#product-desc-photos{{@index}}" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </div>
+
                       <div class="product-desc-info">
+                          <h1>{{{name}}} </h1>
                           <p>{{{description}}}</p>
                       </div>
                     </div>
-                 </div>
+                </script>
             </div>
         {{/each}}
     </div>
-    <!--{{>pagination}}-->
+    {{>productpagination}}
 </div>
