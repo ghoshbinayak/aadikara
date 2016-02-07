@@ -15,7 +15,7 @@ exports = module.exports = function(req, res) {
 	// Load the products
 	view.on('init', function(next) {
 		var q = keystone.list('Page').model.find()
-                        .where('slug', '56b7993dcf8474fc015385c9');
+                        .where('slug', '56b79d74685aea03007bcb99');
 
 		q.exec(function(err, results) {
 			locals.data.pageInfo=results[0];
