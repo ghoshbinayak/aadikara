@@ -42,7 +42,7 @@ Tuti.support = Modernizr.csstransitions;
 
 // defaultTuti.settings
 Tuti.settings = {
-    minHeight : 600,
+    minHeight : window.innerHeight * 0.7,
     speed : 350,
     easing : 'ease'
 };
