@@ -139,7 +139,19 @@ div.og-expanded > div::after {
 	pointer-events: none;
 	border-bottom-color: #ddd;
 	border-width: 15px;
-	margin: 22px 0 0 -15px;
+	margin: -18px 0 0 -15px;
+	@media (min-width: @screen-xs-min) {
+        margin: 22px 0 0 -15px;
+    }
+    @media (min-width: @screen-sm-min) {
+        margin: 22px 0 0 -15px;
+    }
+    @media (min-width: @screen-md-min) {
+        margin: 2px 0 0 -15px;
+    }
+    @media (min-width: @screen-lg-min) {
+        margin: 2px 0 0 -15px;
+    }
 }
 
 .og-expander {
