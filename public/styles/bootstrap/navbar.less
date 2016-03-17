@@ -190,6 +190,17 @@
     .navbar > .container-fluid & {
       margin-left: @navbar-brand-padding-horizontal;
     }
+  > svg {
+      display: block;
+      margin: 0 auto;
+      width: 200px;
+      height: 250%;
+      margin-top: @navbar-default-brand-margin;
+      fill: @navbar-default-brand-color;
+      &:hover {
+          fill: @navbar-default-brand-hover-color;
+      }
+    }
   }
 }
 
