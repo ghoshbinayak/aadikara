@@ -129,7 +129,13 @@
     margin-top: 40px;    
 }
 
-div.og-expanded > div::after {
+div.og-arrow-container{
+    position: relative;
+    height: 0;
+    width: 100%;
+}
+
+div.og-expanded > div.og-arrow-container::after {
 	top: auto;
 	border: solid transparent;
 	content: " ";
@@ -142,6 +148,7 @@ div.og-expanded > div::after {
 	margin: -50px 0 0 -15px;
 	@media (min-width: @screen-xs-min) {
         margin: 4px 0 0 -15px;
+        left: 50%;
     }
     @media (min-width: @screen-sm-min) {
         margin: 4px 0 0 -15px;
